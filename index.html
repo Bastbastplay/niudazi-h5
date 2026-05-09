@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>牛搭子人格，藏不住了</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell" id="app">
+      <section class="screen screen-start is-active" id="startScreen" aria-label="测试首页">
+        <div class="brand-line">
+          <span>1号牧场，你的牛搭子</span>
+          <span>CRUNCH PERSONA TEST</span>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="sunburst"></div>
+          <div class="buddy-scene">
+            <div class="buddy-bull">
+              <span class="bull-horn left"></span>
+              <span class="bull-horn right"></span>
+              <span class="bull-ear left"></span>
+              <span class="bull-ear right"></span>
+              <span class="bull-eye left"></span>
+              <span class="bull-eye right"></span>
+              <span class="bull-nose"></span>
+            </div>
+            <div class="buddy-human">
+              <span class="human-hair"></span>
+              <span class="human-eye left"></span>
+              <span class="human-eye right"></span>
+              <span class="human-smile"></span>
+            </div>
+            <span class="beef-stick stick-a"></span>
+            <span class="beef-stick stick-b"></span>
+            <span class="sesame seed-a"></span>
+            <span class="sesame seed-b"></span>
+            <span class="sesame seed-c"></span>
+            <span class="spark s1"></span>
+            <span class="spark s2"></span>
+          </div>
+        </div>
+        <h1><span>牛搭子人格，</span><span>藏不住了！</span></h1>
+        <p class="intro intro-with-icons">
+          <span class="mood-icons" aria-hidden="true">
+            <i class="mood-icon mood-battery"></i>
+            <i class="mood-icon mood-chat"></i>
+            <i class="mood-icon mood-spark"></i>
+          </span>
+          <span>当代打工人的精神投票，测测你的牛搭子人格！</span>
+        </p>
+        <button class="primary-btn" id="startBtn" type="button">咔嚓开测</button>
+        <button class="ghost-btn" id="soundBtn" type="button" aria-pressed="false">开启咔嚓BGM</button>
+      </section>
+
+      <section class="screen screen-quiz" id="quizScreen" aria-label="测试答题">
+        <div class="quiz-top">
+          <span id="questionCounter">01 / 08</span>
+          <div class="progress-track"><span id="progressBar"></span></div>
+        </div>
+        <article class="question-card" id="questionCard">
+          <p class="kicker" id="questionKicker">Q1</p>
+          <h2 id="questionTitle"></h2>
+          <div class="option-list" id="optionList"></div>
+          <div class="quiz-actions">
+            <button class="back-btn" id="prevQuestionBtn" type="button">上一题</button>
+            <button class="next-btn" id="nextQuestionBtn" type="button" disabled>下一题</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="screen screen-result" id="resultScreen" aria-label="测试结果">
+        <div class="poster" id="poster">
+          <div class="poster-head">
+            <span>1号牧场，你的牛搭子</span>
+            <span id="posterCode">NO.000</span>
+          </div>
+          <div class="result-illustration" id="resultIllustration" aria-hidden="true"></div>
+          <p class="result-label">你的牛搭子人格</p>
+          <h2 id="resultName"></h2>
+          <p class="resultCopy" id="resultCopy"></p>
+          <div class="tag-row" id="tagRow"></div>
+          <div class="poster-footer">
+            <span>1号牧场，牛肉大脆条全新上市</span>
+            <span>牛搭子人格测试</span>
+          </div>
+        </div>
+        <div class="result-actions">
+          <button class="primary-btn" id="restartBtn" type="button">再测一次，嘴硬不认</button>
+          <button class="share-btn" id="shareBtn" type="button">@你的牛搭子 一起测</button>
+          <button class="poster-btn" id="posterBtn" type="button">长按保存海报</button>
+          <button class="poster-btn" id="momentBtn" type="button">分享到朋友圈</button>
+        </div>
+        <p class="save-tip" id="saveTip">建议：结果页可做成长按保存海报；微信内可接入分享卡片与品牌小程序跳转。</p>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./script.js"></script>
+  </body>
+</html>
