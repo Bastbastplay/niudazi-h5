@@ -99,75 +99,75 @@ const TYPES = {
 
 const QUESTIONS = [
   {
-    title: "周一早上打开电脑，你的第一反应是？",
+    title: "周一开机那一秒，你的灵魂在干嘛？",
     options: [
-      ["先找咖啡，再找灵魂。", ["牛马续命型", "深夜回血型"]],
-      ["消息先已读，回复等元神归位。", ["已读不回型", "安静蓄能型"]],
-      ["把零食摆好，今天的工位要有安全感。", ["工位囤货型", "情绪稳定假装型"]],
-      ["谁安排无效会，我先预备反卷发言。", ["硬刚反卷型", "嘴硬逞强型"]]
+      ["肉身坐下了，灵魂还在地铁口排队。", ["牛马续命型", "深夜回血型"]],
+      ["先把微信划走，假装世界还没上班。", ["已读不回型", "安静蓄能型"]],
+      ["打开抽屉盘点口粮，今天先稳住血条。", ["工位囤货型", "情绪稳定假装型"]],
+      ["谁先说“简单同步下”，谁先接受我的凝视。", ["硬刚反卷型", "嘴硬逞强型"]]
     ]
   },
   {
-    title: "同事问你“下班吃什么”，你会？",
+    title: "同事问“下班吃啥”，你的人格弹窗是？",
     options: [
-      ["马上拉群，顺便把气氛炒热。", ["社交发疯型", "周五复活型"]],
-      ["说随便，其实心里已经做好攻略。", ["精致自律型", "说走就走型"]],
-      ["贡献抽屉库存：先垫一口再议。", ["工位囤货型", "牛马续命型"]],
-      ["假装没看到，等大家决定我再出现。", ["已读不回型", "安静蓄能型"]]
+      ["我来组局，但请大家尊重我的发疯节奏。", ["社交发疯型", "周五复活型"]],
+      ["嘴上随便，备忘录里已经三家候选。", ["精致自律型", "说走就走型"]],
+      ["先吃我抽屉里的，别让胃参与决策。", ["工位囤货型", "牛马续命型"]],
+      ["我先隐身，等你们吵出结果再优雅出现。", ["已读不回型", "安静蓄能型"]]
     ]
   },
   {
-    title: "突然来了一个“很急但没说清楚”的需求，你的脑内弹幕是？",
+    title: "老板发来一句“有个小需求”，你会？",
     options: [
-      ["好的收到，然后暗中爆炸。", ["情绪稳定假装型", "嘴硬逞强型"]],
-      ["先问清楚边界，不给模糊需求当燃料。", ["硬刚反卷型", "精致自律型"]],
-      ["今晚又要靠夜色回血了。", ["深夜回血型", "牛马续命型"]],
-      ["我先发个表情包救一下气氛。", ["社交发疯型", "周五复活型"]]
+      ["回“收到”，内心已把桌面掀了三遍。", ["情绪稳定假装型", "嘴硬逞强型"]],
+      ["先问交付物、截止点、谁拍板，别搞玄学。", ["硬刚反卷型", "精致自律型"]],
+      ["很好，今晚又要和月亮签劳动合同。", ["深夜回血型", "牛马续命型"]],
+      ["先丢个梗图，给这个需求做临终关怀。", ["社交发疯型", "周五复活型"]]
     ]
   },
   {
-    title: "你最像哪一种“脆条打开方式”？",
+    title: "如果大脆条能说话，它会怎么评价你？",
     options: [
-      ["边开会边偷吃，咔嚓声是我的反抗。", ["硬刚反卷型", "牛马续命型"]],
-      ["整齐倒进小碟子，生活要有仪式感。", ["精致自律型", "工位囤货型"]],
-      ["分享给全场，顺便收获一圈搭子。", ["社交发疯型", "周五复活型"]],
-      ["留到深夜，一个人慢慢回血。", ["深夜回血型", "安静蓄能型"]]
+      ["此人一边咔嚓一边开会，反骨很脆。", ["硬刚反卷型", "牛马续命型"]],
+      ["此人会给零食摆盘，连摆烂都很精装。", ["精致自律型", "工位囤货型"]],
+      ["此人适合外放，能把茶水间变脱口秀现场。", ["社交发疯型", "周五复活型"]],
+      ["此人请勿打扰，正在夜间独自修复出厂设置。", ["深夜回血型", "安静蓄能型"]]
     ]
   },
   {
-    title: "你的手机电量 12%，但群里开始疯狂 @ 你。",
+    title: "手机 12% 电量，群里开始疯狂 @ 你。",
     options: [
-      ["先装死，电量和本人都需要保护。", ["已读不回型", "安静蓄能型"]],
-      ["边充电边处理，命可以苦，活不能掉。", ["牛马续命型", "嘴硬逞强型"]],
-      ["直接回：重点是什么？", ["硬刚反卷型", "情绪稳定假装型"]],
-      ["回个梗图，先把局面变好笑。", ["社交发疯型", "说走就走型"]]
+      ["手机低电量，我也低电量，一起装死很合理。", ["已读不回型", "安静蓄能型"]],
+      ["插上充电线继续干，像一台没有尊严的共享充电宝。", ["牛马续命型", "嘴硬逞强型"]],
+      ["直接问：所以你们到底要我干嘛？", ["硬刚反卷型", "情绪稳定假装型"]],
+      ["先回表情包，把灾难现场改成综艺现场。", ["社交发疯型", "说走就走型"]]
     ]
   },
   {
-    title: "周五 18:01，你的精神状态最接近？",
+    title: "周五 18:01，你的精神皮肤自动切换成？",
     options: [
-      ["灵魂归位，甚至想换一套衣服。", ["周五复活型", "精致自律型"]],
-      ["订票、约车、出门，别问去哪。", ["说走就走型", "社交发疯型"]],
-      ["回家关机，谁也别碰我的能量条。", ["安静蓄能型", "已读不回型"]],
-      ["继续收尾，嘴上说小事，心里在冒烟。", ["嘴硬逞强型", "情绪稳定假装型"]]
+      ["快乐皮肤：限时返场，眼神突然有光。", ["周五复活型", "精致自律型"]],
+      ["移动皮肤：先出门，目的地路上再编。", ["说走就走型", "社交发疯型"]],
+      ["隐身皮肤：回家、关灯、拒绝人类访问。", ["安静蓄能型", "已读不回型"]],
+      ["嘴硬皮肤：没事我收个尾，其实人已冒烟。", ["嘴硬逞强型", "情绪稳定假装型"]]
     ]
   },
   {
-    title: "你在朋友圈最可能发什么？",
+    title: "你的朋友圈如果突然营业，会是哪种事故？",
     options: [
-      ["一张很会生活的图，配字很克制。", ["精致自律型", "安静蓄能型"]],
-      ["“世界很吵，我先跑路。”", ["说走就走型", "深夜回血型"]],
-      ["热梗九宫格，精神状态领先时代。", ["社交发疯型", "周五复活型"]],
-      ["不发，主要靠别人猜我还活着。", ["已读不回型", "硬刚反卷型"]]
+      ["一张精修生活照，配字短到像高冷免责声明。", ["精致自律型", "安静蓄能型"]],
+      ["一张车票或天空，暗示本人已脱离工位引力。", ["说走就走型", "深夜回血型"]],
+      ["九宫格热梗连发，朋友以为你被夺舍了。", ["社交发疯型", "周五复活型"]],
+      ["不发，主打一个让互联网自行怀念我。", ["已读不回型", "硬刚反卷型"]]
     ]
   },
   {
-    title: "你想找一个什么样的牛搭子？",
+    title: "你想找一个什么样的牛搭子，陪你渡劫？",
     options: [
-      ["在我快没电时，把我从工位上捞回来。", ["牛马续命型", "工位囤货型"]],
-      ["陪我优雅地把今天糊弄过去。", ["情绪稳定假装型", "精致自律型"]],
-      ["陪我深夜复盘，并假装一切都会好。", ["深夜回血型", "嘴硬逞强型"]],
-      ["陪我分享、出走、发疯、复活。", ["社交发疯型", "说走就走型", "周五复活型"]]
+      ["在我电量见底时，递来一口脆和一丝人性。", ["牛马续命型", "工位囤货型"]],
+      ["陪我体面糊弄今天，明天再假装重新做人。", ["情绪稳定假装型", "精致自律型"]],
+      ["陪我深夜复盘，然后一起得出“都怪世界”的结论。", ["深夜回血型", "嘴硬逞强型"]],
+      ["陪我分享、出走、发疯、复活，人生主打随机刷新。", ["社交发疯型", "说走就走型", "周五复活型"]]
     ]
   }
 ];
@@ -176,8 +176,9 @@ const typeOrder = Object.keys(TYPES);
 const scores = Object.fromEntries(typeOrder.map((type) => [type, 0]));
 const selectedAnswers = [];
 let currentQuestion = 0;
-let audioContext;
 let soundEnabled = false;
+let isAdvancing = false;
+let currentResultType = "";
 
 const startScreen = document.querySelector("#startScreen");
 const quizScreen = document.querySelector("#quizScreen");
@@ -194,8 +195,9 @@ const resultIllustration = document.querySelector("#resultIllustration");
 const tagRow = document.querySelector("#tagRow");
 const posterCode = document.querySelector("#posterCode");
 const toast = document.querySelector("#toast");
-const prevQuestionBtn = document.querySelector("#prevQuestionBtn");
-const nextQuestionBtn = document.querySelector("#nextQuestionBtn");
+const posterModal = document.querySelector("#posterModal");
+const posterImage = document.querySelector("#posterImage");
+const asmrAudio = document.querySelector("#asmrAudio");
 
 document.querySelector("#startBtn").addEventListener("click", () => {
   playCrunch();
@@ -209,32 +211,10 @@ document.querySelector("#restartBtn").addEventListener("click", () => {
   });
   selectedAnswers.length = 0;
   currentQuestion = 0;
+  isAdvancing = false;
   playCrunch();
   showScreen(resultScreen, quizScreen);
   renderQuestion();
-});
-
-prevQuestionBtn.addEventListener("click", () => {
-  if (currentQuestion === 0) return;
-  currentQuestion -= 1;
-  playCrunch();
-  renderQuestion();
-});
-
-nextQuestionBtn.addEventListener("click", () => {
-  if (!selectedAnswers[currentQuestion]) {
-    showToast("先选一个最像你的状态。");
-    return;
-  }
-
-  playCrunch();
-  if (currentQuestion < QUESTIONS.length - 1) {
-    currentQuestion += 1;
-    renderQuestion();
-  } else {
-    progressBar.style.width = "100%";
-    setTimeout(showResult, 180);
-  }
 });
 
 document.querySelector("#shareBtn").addEventListener("click", async () => {
@@ -258,19 +238,29 @@ document.querySelector("#shareBtn").addEventListener("click", async () => {
 });
 
 document.querySelector("#posterBtn").addEventListener("click", () => {
-  document.querySelector("#poster").scrollIntoView({ behavior: "smooth", block: "start" });
-  showToast("海报已就位，长按或截图保存。");
+  showPosterImage();
 });
 
 document.querySelector("#momentBtn").addEventListener("click", () => {
-  showToast("微信里可长按保存海报，再分享到朋友圈。");
+  showToast("微信不开放直接拉起朋友圈发布；请长按保存海报后，从朋友圈选择图片发布。");
+});
+
+document.querySelector("#posterCloseBtn").addEventListener("click", () => {
+  posterModal.classList.remove("is-visible");
+  posterModal.setAttribute("aria-hidden", "true");
 });
 
 document.querySelector("#soundBtn").addEventListener("click", (event) => {
   soundEnabled = !soundEnabled;
   event.currentTarget.setAttribute("aria-pressed", String(soundEnabled));
-  event.currentTarget.textContent = soundEnabled ? "咔嚓BGM已开启" : "开启咔嚓BGM";
-  if (soundEnabled) playCrunch();
+  event.currentTarget.textContent = soundEnabled ? "停止专属BGM" : "开启专属BGM";
+  if (soundEnabled) {
+    asmrAudio.currentTime = 0;
+    asmrAudio.play().catch(() => showToast("浏览器拦截了自动播放，请再点一次。"));
+  } else {
+    asmrAudio.pause();
+    asmrAudio.currentTime = 0;
+  }
 });
 
 function showScreen(from, to) {
@@ -289,10 +279,6 @@ function renderQuestion() {
   questionTitle.textContent = question.title;
   progressBar.style.width = `${(currentQuestion / QUESTIONS.length) * 100}%`;
   optionList.innerHTML = "";
-  nextQuestionBtn.disabled = !selectedAnswers[currentQuestion];
-  nextQuestionBtn.textContent = "下一题";
-  prevQuestionBtn.disabled = currentQuestion === 0;
-  prevQuestionBtn.textContent = "上一题";
 
   question.options.forEach(([label, targetTypes], index) => {
     const button = document.createElement("button");
@@ -309,10 +295,22 @@ function renderQuestion() {
 }
 
 function chooseOption(label, targetTypes) {
+  if (isAdvancing) return;
+  isAdvancing = true;
   selectedAnswers[currentQuestion] = { label, targetTypes };
-  nextQuestionBtn.disabled = false;
   playCrunch();
   renderQuestion();
+
+  if (currentQuestion < QUESTIONS.length - 1) {
+    setTimeout(() => {
+      currentQuestion += 1;
+      isAdvancing = false;
+      renderQuestion();
+    }, 260);
+  } else {
+    progressBar.style.width = "100%";
+    setTimeout(showResult, 320);
+  }
 }
 
 function showResult() {
@@ -324,6 +322,7 @@ function showResult() {
   }, typeOrder[0]);
 
   const data = TYPES[topType];
+  currentResultType = topType;
   resultName.textContent = topType;
   resultCopy.innerHTML = formatResultCopy(data.copy);
   posterCode.textContent = `NO.${String(typeOrder.indexOf(topType) + 1).padStart(3, "0")}`;
@@ -335,7 +334,7 @@ function showResult() {
 
 function formatResultCopy(copy) {
   return copy
-    .split(/(?<=[。；])/)
+    .split(/(?<=[，。；])/)
     .map((sentence) => sentence.trim())
     .filter(Boolean)
     .join("<br>");
@@ -360,52 +359,118 @@ function recentAnswerIndex(type) {
 }
 
 function createIllustration(type, data) {
-  const prop = {
-    coffee: `<rect x="214" y="68" width="58" height="76" rx="10" fill="#fffaf0" stroke="#1d1a15" stroke-width="5"/><path d="M272 91h18c13 0 13 30 0 30h-18" fill="none" stroke="#1d1a15" stroke-width="5"/><path d="M226 55c-10-16 12-17 2-33M252 55c-10-16 12-17 2-33" fill="none" stroke="#1d1a15" stroke-width="4"/><path d="M74 152h70" stroke="#1d1a15" stroke-width="7" stroke-linecap="round"/>`,
-    message: `<rect x="205" y="68" width="106" height="76" rx="14" fill="#fffaf0" stroke="#1d1a15" stroke-width="5"/><circle cx="236" cy="106" r="6" fill="#1d1a15"/><circle cx="258" cy="106" r="6" fill="#1d1a15"/><circle cx="280" cy="106" r="6" fill="#1d1a15"/><path d="M116 60h64M96 86h54" stroke="#1d1a15" stroke-width="7" stroke-linecap="round"/>`,
-    friday: `<rect x="210" y="62" width="94" height="92" rx="12" fill="#fffaf0" stroke="#1d1a15" stroke-width="5"/><path d="M210 90h94" stroke="#1d1a15" stroke-width="5"/><circle cx="235" cy="121" r="11" fill="#df4b35"/><circle cx="268" cy="121" r="11" fill="#28734f"/><path d="M99 138q42 35 92 0" fill="none" stroke="#1d1a15" stroke-width="7" stroke-linecap="round"/>`,
-    snacks: `<rect x="205" y="94" width="120" height="66" rx="8" fill="#fffaf0" stroke="#1d1a15" stroke-width="5"/><path d="M222 82h86v26h-86z" fill="#df4b35" stroke="#1d1a15" stroke-width="5"/><path d="M230 130h70" stroke="#1d1a15" stroke-width="5"/><path d="M82 74h74v94H82z" fill="#f4c341" stroke="#1d1a15" stroke-width="5"/>`,
-    mask: `<path d="M210 82c30 18 72 18 102 0v58c-21 26-81 26-102 0z" fill="#fffaf0" stroke="#1d1a15" stroke-width="5"/><path d="M234 112q10 10 20 0M272 112q10 10 20 0" fill="none" stroke="#1d1a15" stroke-width="4"/><path d="M98 80l30 30-30 30-30-30z" fill="#f4c341" stroke="#1d1a15" stroke-width="5"/>`,
-    boxing: `<path d="M214 92c13-30 68-22 68 20v45h-78v-38c0-11 4-20 10-27z" fill="#df4b35" stroke="#1d1a15" stroke-width="5"/><path d="M282 118h34v39h-34z" fill="#df4b35" stroke="#1d1a15" stroke-width="5"/><path d="M78 122h88M122 78v88" stroke="#1d1a15" stroke-width="8" stroke-linecap="round"/>`,
-    moon: `<path d="M295 58c-36 8-58 40-49 75 7 27 30 45 57 47-12 8-27 11-43 7-42-9-69-50-60-92 8-39 46-66 85-60 5 1 9 2 10 23z" fill="#fffaf0" stroke="#1d1a15" stroke-width="5"/><circle cx="112" cy="84" r="7" fill="#f4c341"/><circle cx="146" cy="122" r="5" fill="#f4c341"/><path d="M78 164h86" stroke="#1d1a15" stroke-width="7" stroke-linecap="round"/>`,
-    speaker: `<path d="M206 112h34l52-40v110l-52-40h-34z" fill="#2864a4" stroke="#1d1a15" stroke-width="5"/><path d="M307 100q20 28 0 56M326 84q34 46 0 92" fill="none" stroke="#1d1a15" stroke-width="5"/><circle cx="104" cy="96" r="32" fill="#df4b35" stroke="#1d1a15" stroke-width="5"/>`,
-    plant: `<path d="M224 126h82l-12 64h-58z" fill="#df4b35" stroke="#1d1a15" stroke-width="5"/><path d="M260 128c-8-50-40-65-61-49 15 30 38 40 61 49zM266 128c10-54 48-71 68-50-17 34-42 42-68 50z" fill="#28734f" stroke="#1d1a15" stroke-width="5"/><path d="M78 86h82v82H78z" fill="#fffaf0" stroke="#1d1a15" stroke-width="5"/>`,
-    dumbbell: `<path d="M210 112v48M234 104v64M286 104v64M310 112v48M234 136h52" fill="none" stroke="#1d1a15" stroke-width="12" stroke-linecap="round"/><rect x="76" y="72" width="92" height="104" rx="10" fill="#fffaf0" stroke="#1d1a15" stroke-width="5"/><path d="M96 102h52M96 128h52M96 154h34" stroke="#2864a4" stroke-width="7" stroke-linecap="round"/>`,
-    armor: `<path d="M216 68h94v112c-20 20-52 26-94 0z" fill="#fffaf0" stroke="#1d1a15" stroke-width="5"/><path d="M236 96h54M236 124h54M263 68v128" stroke="#df4b35" stroke-width="5"/><path d="M86 86l74 74M160 86l-74 74" stroke="#1d1a15" stroke-width="7" stroke-linecap="round"/>`,
-    suitcase: `<rect x="210" y="88" width="96" height="96" rx="13" fill="#f4c341" stroke="#1d1a15" stroke-width="5"/><path d="M238 88v-20h42v20M240 116h40M240 142h40" fill="none" stroke="#1d1a15" stroke-width="5"/><path d="M86 134c35-38 72-52 111-42" fill="none" stroke="#28734f" stroke-width="7" stroke-linecap="round"/><path d="M190 78l24 17-27 9" fill="none" stroke="#28734f" stroke-width="7" stroke-linecap="round"/>`
+  const mouth = {
+    coffee: "M142 122q18 10 36 0",
+    message: "M145 124h34",
+    friday: "M136 116q22 22 44 0",
+    snacks: "M140 120q20 16 40 0",
+    mask: "M144 123q18-7 36 0",
+    boxing: "M144 123h34",
+    moon: "M142 121q18 10 36 0",
+    speaker: "M134 114q25 26 50 0",
+    plant: "M145 123h30",
+    dumbbell: "M140 118q20 14 40 0",
+    armor: "M144 124q17-9 34 0",
+    suitcase: "M140 116q20 19 40 0"
+  }[data.prop];
+
+  const eyes = {
+    coffee: `<path d="M132 95h19M171 95h19" stroke="#1d1a15" stroke-width="6" stroke-linecap="round"/>`,
+    message: `<circle cx="140" cy="96" r="5" fill="#1d1a15"/><circle cx="180" cy="96" r="5" fill="#1d1a15"/>`,
+    friday: `<path d="M130 93q10-9 21 0M170 93q10-9 21 0" fill="none" stroke="#1d1a15" stroke-width="5" stroke-linecap="round"/>`,
+    snacks: `<circle cx="140" cy="96" r="5" fill="#1d1a15"/><circle cx="180" cy="96" r="5" fill="#1d1a15"/>`,
+    mask: `<path d="M130 94q11 10 22 0M170 94q11 10 22 0" fill="none" stroke="#1d1a15" stroke-width="5" stroke-linecap="round"/>`,
+    boxing: `<path d="M130 92l22 9M192 92l-22 9" stroke="#1d1a15" stroke-width="6" stroke-linecap="round"/>`,
+    moon: `<path d="M131 96h20M171 96h20" stroke="#1d1a15" stroke-width="6" stroke-linecap="round"/>`,
+    speaker: `<circle cx="140" cy="96" r="7" fill="#1d1a15"/><circle cx="181" cy="96" r="7" fill="#1d1a15"/>`,
+    plant: `<circle cx="140" cy="97" r="5" fill="#1d1a15"/><circle cx="180" cy="97" r="5" fill="#1d1a15"/>`,
+    dumbbell: `<circle cx="140" cy="96" r="5" fill="#1d1a15"/><circle cx="180" cy="96" r="5" fill="#1d1a15"/>`,
+    armor: `<path d="M131 96h19M171 96h19" stroke="#1d1a15" stroke-width="6" stroke-linecap="round"/>`,
+    suitcase: `<circle cx="140" cy="96" r="5" fill="#1d1a15"/><circle cx="180" cy="96" r="5" fill="#1d1a15"/>`
+  }[data.prop];
+
+  const bull = `
+    <g transform="translate(-8 0)">
+      <path d="M55 230c16-70 42-107 112-107s96 37 112 107z" fill="#8f4f2c" stroke="#1d1a15" stroke-width="6"/>
+      <circle cx="167" cy="87" r="58" fill="#8f4f2c" stroke="#1d1a15" stroke-width="6"/>
+      <path d="M128 49c-22-43 27-52 37-14M206 49c22-43-27-52-37-14" fill="#fffaf0" stroke="#1d1a15" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M137 132c16 17 44 17 60 0v36h-60z" fill="#fffaf0" stroke="#1d1a15" stroke-width="5"/>
+      ${eyes}
+      <path d="${mouth}" fill="none" stroke="#1d1a15" stroke-width="5" stroke-linecap="round"/>
+      <path d="M153 159h39" stroke="#a84b2e" stroke-width="18" stroke-linecap="round"/>
+      <circle cx="163" cy="158" r="4" fill="#f5df96"/>
+      <circle cx="181" cy="158" r="4" fill="#f5df96"/>
+    </g>`;
+
+  const scenes = {
+    coffee: `<g><rect x="238" y="36" width="70" height="104" rx="12" fill="#fffaf0" stroke="#1d1a15" stroke-width="6"/><path d="M308 70h18c15 0 15 38 0 38h-18" fill="none" stroke="#1d1a15" stroke-width="6"/><rect x="58" y="50" width="46" height="118" rx="18" fill="#df4b35" stroke="#1d1a15" stroke-width="6"/><rect x="72" y="138" width="18" height="14" fill="#f4c341"/><path d="M44 189h106M74 28h74" stroke="#1d1a15" stroke-width="8" stroke-linecap="round" opacity=".18"/></g>`,
+    message: `<g><rect x="228" y="42" width="112" height="142" rx="18" fill="#2864a4" stroke="#1d1a15" stroke-width="6"/><rect x="244" y="62" width="80" height="94" rx="10" fill="#fffaf0"/><circle cx="266" cy="110" r="7" fill="#1d1a15"/><circle cx="284" cy="110" r="7" fill="#1d1a15"/><circle cx="302" cy="110" r="7" fill="#1d1a15"/><path d="M50 70h90M30 102h62M54 184h102" stroke="#2864a4" stroke-width="8" stroke-linecap="round" opacity=".5"/></g>`,
+    friday: `<g><rect x="230" y="34" width="100" height="108" rx="14" fill="#fffaf0" stroke="#1d1a15" stroke-width="6"/><path d="M230 70h100" stroke="#1d1a15" stroke-width="6"/><circle cx="258" cy="106" r="13" fill="#df4b35"/><circle cx="298" cy="106" r="13" fill="#28734f"/><path d="M36 156q62 42 134 0" fill="none" stroke="#1d1a15" stroke-width="8" stroke-linecap="round"/><circle cx="78" cy="72" r="35" fill="#f4c341" stroke="#1d1a15" stroke-width="6"/></g>`,
+    snacks: `<g><path d="M220 112h122v84H220z" fill="#fffaf0" stroke="#1d1a15" stroke-width="6"/><path d="M238 88h86v38h-86z" fill="#df4b35" stroke="#1d1a15" stroke-width="6"/><rect x="42" y="46" width="88" height="128" rx="10" fill="#f4c341" stroke="#1d1a15" stroke-width="6"/><path d="M58 86h56M58 122h56M70 158h34" stroke="#1d1a15" stroke-width="7" stroke-linecap="round"/></g>`,
+    mask: `<g><path d="M220 54c34 22 80 22 114 0v70c-28 34-86 34-114 0z" fill="#fffaf0" stroke="#1d1a15" stroke-width="6"/><path d="M244 90q12 11 24 0M290 90q12 11 24 0M258 122q22-9 44 0" fill="none" stroke="#1d1a15" stroke-width="5" stroke-linecap="round"/><path d="M48 48l52 52-52 52-52-52z" fill="#f4c341" stroke="#1d1a15" stroke-width="6"/><path d="M32 190h120" stroke="#1d1a15" stroke-width="8" stroke-linecap="round" opacity=".25"/></g>`,
+    boxing: `<g><path d="M230 70c18-42 88-30 88 24v70h-102v-52c0-16 5-30 14-42z" fill="#df4b35" stroke="#1d1a15" stroke-width="6"/><path d="M318 112h38v52h-38z" fill="#df4b35" stroke="#1d1a15" stroke-width="6"/><path d="M26 118h132M92 54v128M46 70l92 92M138 70l-92 92" stroke="#1d1a15" stroke-width="8" stroke-linecap="round"/></g>`,
+    moon: `<g><path d="M330 26c-45 10-74 50-63 94 9 35 39 58 75 61-18 14-42 18-65 12-52-13-84-66-71-118 12-50 60-82 110-72 8 2 14 5 14 23z" fill="#fffaf0" stroke="#1d1a15" stroke-width="6"/><circle cx="72" cy="58" r="8" fill="#f4c341"/><circle cx="126" cy="96" r="6" fill="#f4c341"/><path d="M28 180h138M58 150h78" stroke="#2864a4" stroke-width="8" stroke-linecap="round"/></g>`,
+    speaker: `<g><path d="M220 100h40l64-50v130l-64-50h-40z" fill="#2864a4" stroke="#1d1a15" stroke-width="6"/><path d="M338 84q26 38 0 76M26 58l42 16M34 174l50-22M74 40l34 44" fill="none" stroke="#1d1a15" stroke-width="7" stroke-linecap="round"/><circle cx="82" cy="110" r="36" fill="#df4b35" stroke="#1d1a15" stroke-width="6"/></g>`,
+    plant: `<g><path d="M238 126h92l-14 72h-64z" fill="#df4b35" stroke="#1d1a15" stroke-width="6"/><path d="M276 130c-12-58-50-80-78-58 18 38 46 50 78 58zM286 130c16-64 60-82 84-56-22 40-52 50-84 56z" fill="#28734f" stroke="#1d1a15" stroke-width="6"/><rect x="36" y="70" width="100" height="108" rx="12" fill="#fffaf0" stroke="#1d1a15" stroke-width="6"/><path d="M62 124h50M86 98v52" stroke="#f4c341" stroke-width="9" stroke-linecap="round"/></g>`,
+    dumbbell: `<g><path d="M224 106v62M254 92v90M302 92v90M332 106v62M254 137h48" fill="none" stroke="#1d1a15" stroke-width="13" stroke-linecap="round"/><rect x="34" y="42" width="106" height="140" rx="12" fill="#fffaf0" stroke="#1d1a15" stroke-width="6"/><path d="M58 78h58M58 112h58M58 146h36" stroke="#2864a4" stroke-width="8" stroke-linecap="round"/></g>`,
+    armor: `<g><path d="M232 42h104v140c-25 25-62 33-104 0z" fill="#fffaf0" stroke="#1d1a15" stroke-width="6"/><path d="M254 80h58M254 116h58M284 42v154M238 170l92-92" stroke="#df4b35" stroke-width="6"/><path d="M42 72l100 100M142 72l-100 100" stroke="#1d1a15" stroke-width="8" stroke-linecap="round"/><circle cx="92" cy="122" r="44" fill="none" stroke="#f4c341" stroke-width="9"/></g>`,
+    suitcase: `<g><rect x="226" y="76" width="110" height="112" rx="14" fill="#f4c341" stroke="#1d1a15" stroke-width="6"/><path d="M258 76v-26h46v26M258 112h48M258 148h48" fill="none" stroke="#1d1a15" stroke-width="6"/><path d="M26 152c42-54 92-72 150-56" fill="none" stroke="#28734f" stroke-width="9" stroke-linecap="round"/><path d="M164 84l32 18-34 14" fill="none" stroke="#28734f" stroke-width="9" stroke-linecap="round"/></g>`
   }[data.prop];
 
   return `
-    <svg viewBox="0 0 360 230" role="img" aria-label="${type}插画">
+    <svg viewBox="0 0 360 230" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${type}插画">
       <rect width="360" height="230" fill="#fff7df"/>
-      <circle cx="76" cy="54" r="42" fill="${data.accent}" stroke="#1d1a15" stroke-width="5"/>
-      <circle cx="285" cy="186" r="28" fill="${data.color}" stroke="#1d1a15" stroke-width="5" opacity="0.9"/>
-      <path d="M16 190c42-25 88-27 136-5 56 26 105 25 194-4v49H16z" fill="${data.color}" opacity="0.18"/>
-      <path d="M36 36h82M44 62h52M246 38h68" stroke="#1d1a15" stroke-width="6" stroke-linecap="round" opacity="0.22"/>
-      <path d="M158 188l20-115 20 115" fill="none" stroke="#1d1a15" stroke-width="7" stroke-linecap="round"/>
-      <path d="M151 91h54" stroke="#a84b2e" stroke-width="20" stroke-linecap="round"/>
-      <circle cx="164" cy="91" r="5" fill="#f5df96"/>
-      <circle cx="188" cy="91" r="5" fill="#f5df96"/>
-      ${prop}
+      <path d="M-18 188c52-34 111-36 172-8 68 31 126 28 226-10v70H-18z" fill="${data.color}" opacity="0.2"/>
+      <circle cx="32" cy="16" r="64" fill="${data.accent}" stroke="#1d1a15" stroke-width="6"/>
+      <circle cx="336" cy="212" r="58" fill="${data.color}" stroke="#1d1a15" stroke-width="6" opacity="0.88"/>
+      <path d="M-6 32h114M-2 61h68M246 26h118" stroke="#1d1a15" stroke-width="8" stroke-linecap="round" opacity="0.16"/>
+      ${scenes}
+      ${bull}
     </svg>
   `;
 }
 
 function playCrunch() {
   if (!soundEnabled) return;
-  audioContext = audioContext || new (window.AudioContext || window.webkitAudioContext)();
-  const now = audioContext.currentTime;
-  for (let i = 0; i < 5; i += 1) {
-    const oscillator = audioContext.createOscillator();
-    const gain = audioContext.createGain();
-    oscillator.type = "square";
-    oscillator.frequency.setValueAtTime(900 + Math.random() * 850, now + i * 0.018);
-    gain.gain.setValueAtTime(0.035, now + i * 0.018);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.018 + 0.045);
-    oscillator.connect(gain).connect(audioContext.destination);
-    oscillator.start(now + i * 0.018);
-    oscillator.stop(now + i * 0.018 + 0.05);
-  }
+  asmrAudio.currentTime = Math.max(0, asmrAudio.currentTime - 0.08);
+}
+
+function showPosterImage() {
+  if (!currentResultType) return;
+  const data = TYPES[currentResultType];
+  const tags = data.tags.join(" / ");
+  const copyLines = formatResultCopy(data.copy)
+    .replaceAll("<br>", "\n")
+    .split("\n")
+    .slice(0, 6);
+  const posterArt = createIllustration(currentResultType, data).replace(
+    "<svg ",
+    '<svg x="82" y="320" width="556" height="320" '
+  );
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="720" height="1120" viewBox="0 0 720 1120">
+      <rect width="720" height="1120" fill="#fff2d5"/>
+      <path d="M42 42h636v1036H42z" fill="#f9e4b7" stroke="#1d1a15" stroke-width="8" rx="24"/>
+      <text x="82" y="105" font-family="Arial, sans-serif" font-size="28" font-weight="900" fill="#1d1a15">1号牧场，你的牛搭子</text>
+      <text x="82" y="190" font-family="Arial, sans-serif" font-size="34" font-weight="900" fill="#df4b35">你的牛搭子人格</text>
+      <text x="82" y="270" font-family="Arial, sans-serif" font-size="64" font-weight="900" fill="#1d1a15">${escapeSvg(currentResultType)}</text>
+      <rect x="82" y="320" width="556" height="320" rx="24" fill="#fffaf0" stroke="#1d1a15" stroke-width="6"/>
+      ${posterArt}
+      ${copyLines.map((line, index) => `<text x="82" y="${710 + index * 46}" font-family="Arial, sans-serif" font-size="27" font-weight="700" fill="#3f3429">${escapeSvg(line)}</text>`).join("")}
+      <text x="82" y="970" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#28734f">${escapeSvg(tags)}</text>
+      <text x="82" y="1030" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#1d1a15">牛肉大脆条全新上市</text>
+    </svg>`;
+  posterImage.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+  posterModal.classList.add("is-visible");
+  posterModal.setAttribute("aria-hidden", "false");
+}
+
+function escapeSvg(text) {
+  return text
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
 }
 
 function throwConfetti(color, accent) {

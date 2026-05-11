@@ -11,7 +11,7 @@
     <main class="app-shell" id="app">
       <section class="screen screen-start is-active" id="startScreen" aria-label="测试首页">
         <div class="brand-line">
-          <span>1号牧场，你的牛搭子</span>
+          <span class="brand-lockup"><i>1号牧场</i><i>你的牛搭子</i></span>
           <span>CRUNCH PERSONA TEST</span>
         </div>
         <div class="hero-art" aria-hidden="true">
@@ -41,17 +41,20 @@
             <span class="spark s2"></span>
           </div>
         </div>
-        <h1><span>牛搭子人格，</span><span>藏不住了！</span></h1>
+        <h1><span class="title-your">你的</span><span class="title-persona">牛搭子人格</span><span class="title-hide">藏不住了！</span></h1>
         <p class="intro intro-with-icons">
-          <span class="mood-icons" aria-hidden="true">
-            <i class="mood-icon mood-battery"></i>
-            <i class="mood-icon mood-chat"></i>
-            <i class="mood-icon mood-spark"></i>
+          <span class="intro-line intro-line-one">
+            当代打工人的精神自测
+            <i class="mood-icon mood-cow" aria-hidden="true"></i>
           </span>
-          <span>当代打工人的精神投票，测测你的牛搭子人格！</span>
+          <span class="intro-line intro-line-two">
+            看看你是哪种牛搭子！
+            <i class="mood-icon mood-search" aria-hidden="true"></i>
+          </span>
         </p>
         <button class="primary-btn" id="startBtn" type="button">咔嚓开测</button>
-        <button class="ghost-btn" id="soundBtn" type="button" aria-pressed="false">开启咔嚓BGM</button>
+        <button class="ghost-btn" id="soundBtn" type="button" aria-pressed="false">开启专属BGM</button>
+        <audio id="asmrAudio" src="./assets/eating-chips.mp3" loop preload="auto"></audio>
       </section>
 
       <section class="screen screen-quiz" id="quizScreen" aria-label="测试答题">
@@ -63,10 +66,6 @@
           <p class="kicker" id="questionKicker">Q1</p>
           <h2 id="questionTitle"></h2>
           <div class="option-list" id="optionList"></div>
-          <div class="quiz-actions">
-            <button class="back-btn" id="prevQuestionBtn" type="button">上一题</button>
-            <button class="next-btn" id="nextQuestionBtn" type="button" disabled>下一题</button>
-          </div>
         </article>
       </section>
 
@@ -97,6 +96,13 @@
     </main>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <div class="poster-modal" id="posterModal" aria-hidden="true">
+      <div class="poster-modal-card">
+        <button class="poster-close" id="posterCloseBtn" type="button">关闭</button>
+        <img id="posterImage" alt="牛搭子人格海报" />
+        <p>长按图片保存，再分享到朋友圈</p>
+      </div>
+    </div>
     <script src="./script.js"></script>
   </body>
 </html>
