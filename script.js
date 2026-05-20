@@ -173,6 +173,7 @@ const QUESTIONS = [
 ];
 
 const typeOrder = Object.keys(TYPES);
+const SHARE_URL = "https://yihaoranch.songroad.pro";
 const scores = Object.fromEntries(typeOrder.map((type) => [type, 0]));
 const selectedAnswers = [];
 let currentQuestion = 0;
@@ -442,11 +443,12 @@ function showPosterImage() {
   const copyLines = formatResultCopy(data.copy)
     .replaceAll("<br>", "\n")
     .split("\n")
-    .slice(0, 6);
+    .slice(0, 5);
   const posterArt = createIllustration(currentResultType, data).replace(
     "<svg ",
     '<svg x="82" y="320" width="556" height="320" '
   );
+  const qrCode = createQrSvg(SHARE_URL, 500, 910, 120);
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="720" height="1120" viewBox="0 0 720 1120">
       <rect width="720" height="1120" fill="#fff2d5"/>
@@ -456,13 +458,179 @@ function showPosterImage() {
       <text x="82" y="270" font-family="Arial, sans-serif" font-size="64" font-weight="900" fill="#1d1a15">${escapeSvg(currentResultType)}</text>
       <rect x="82" y="320" width="556" height="320" rx="24" fill="#fffaf0" stroke="#1d1a15" stroke-width="6"/>
       ${posterArt}
-      ${copyLines.map((line, index) => `<text x="82" y="${710 + index * 46}" font-family="Arial, sans-serif" font-size="27" font-weight="700" fill="#3f3429">${escapeSvg(line)}</text>`).join("")}
-      <text x="82" y="970" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#28734f">${escapeSvg(tags)}</text>
-      <text x="82" y="1030" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#1d1a15">牛肉大脆条全新上市</text>
+      ${copyLines.map((line, index) => `<text x="82" y="${700 + index * 44}" font-family="Arial, sans-serif" font-size="27" font-weight="700" fill="#3f3429">${escapeSvg(line)}</text>`).join("")}
+      <text x="82" y="948" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#28734f">${escapeSvg(tags)}</text>
+      <text x="82" y="1000" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#1d1a15">1号牧场，牛肉大脆条全新上市</text>
+      <text x="82" y="1040" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#725f48">扫码测你的牛搭子人格</text>
+      ${qrCode}
     </svg>`;
   posterImage.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
   posterModal.classList.add("is-visible");
   posterModal.setAttribute("aria-hidden", "false");
+}
+
+function createQrSvg(text, x, y, size) {
+  const qr = createQrMatrix(text);
+  const quiet = 4;
+  const module = size / (qr.length + quiet * 2);
+  const dots = [];
+
+  qr.forEach((row, rowIndex) => {
+    row.forEach((isDark, colIndex) => {
+      if (!isDark) return;
+      dots.push(`<rect x="${(x + (colIndex + quiet) * module).toFixed(2)}" y="${(y + (rowIndex + quiet) * module).toFixed(2)}" width="${module.toFixed(2)}" height="${module.toFixed(2)}"/>`);
+    });
+  });
+
+  return `
+    <g shape-rendering="crispEdges">
+      <rect x="${x}" y="${y}" width="${size}" height="${size}" rx="10" fill="#fffaf0" stroke="#1d1a15" stroke-width="5"/>
+      <g fill="#1d1a15">${dots.join("")}</g>
+      <text x="${x + size / 2}" y="${y + size + 28}" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="900" fill="#1d1a15">扫码开测</text>
+    </g>`;
+}
+
+function createQrMatrix(text) {
+  const version = 3;
+  const size = version * 4 + 17;
+  const dataCodewords = 55;
+  const eccCodewords = 15;
+  const matrix = Array.from({ length: size }, () => Array(size).fill(null));
+
+  function set(row, col, value) {
+    if (row >= 0 && row < size && col >= 0 && col < size) matrix[row][col] = value;
+  }
+
+  function finder(row, col) {
+    for (let y = -1; y <= 7; y += 1) {
+      for (let x = -1; x <= 7; x += 1) {
+        const rr = row + y;
+        const cc = col + x;
+        const dark = x >= 0 && x <= 6 && y >= 0 && y <= 6 && (x === 0 || x === 6 || y === 0 || y === 6 || (x >= 2 && x <= 4 && y >= 2 && y <= 4));
+        set(rr, cc, dark);
+      }
+    }
+  }
+
+  function alignment(row, col) {
+    for (let y = -2; y <= 2; y += 1) {
+      for (let x = -2; x <= 2; x += 1) {
+        set(row + y, col + x, Math.max(Math.abs(x), Math.abs(y)) !== 1);
+      }
+    }
+  }
+
+  finder(0, 0);
+  finder(0, size - 7);
+  finder(size - 7, 0);
+  alignment(22, 22);
+
+  for (let i = 8; i < size - 8; i += 1) {
+    set(6, i, i % 2 === 0);
+    set(i, 6, i % 2 === 0);
+  }
+
+  const formatCoords = [
+    ...Array.from({ length: 6 }, (_, i) => [8, i]),
+    [8, 7],
+    [8, 8],
+    [7, 8],
+    ...Array.from({ length: 6 }, (_, i) => [5 - i, 8]),
+    ...Array.from({ length: 8 }, (_, i) => [size - 1 - i, 8]),
+    ...Array.from({ length: 7 }, (_, i) => [8, size - 7 + i])
+  ];
+  formatCoords.forEach(([row, col]) => set(row, col, false));
+  set(size - 8, 8, true);
+
+  const bytes = Array.from(new TextEncoder().encode(text));
+  const bits = [];
+  const pushBits = (value, length) => {
+    for (let i = length - 1; i >= 0; i -= 1) bits.push((value >>> i) & 1);
+  };
+
+  pushBits(4, 4);
+  pushBits(bytes.length, 8);
+  bytes.forEach((byte) => pushBits(byte, 8));
+  for (let i = 0; i < 4 && bits.length < dataCodewords * 8; i += 1) bits.push(0);
+  while (bits.length % 8) bits.push(0);
+
+  const data = [];
+  for (let i = 0; i < bits.length; i += 8) {
+    data.push(bits.slice(i, i + 8).reduce((value, bit) => (value << 1) | bit, 0));
+  }
+  for (let pad = 0; data.length < dataCodewords; pad += 1) data.push(pad % 2 ? 0x11 : 0xec);
+
+  const codewords = [...data, ...reedSolomon(data, eccCodewords)];
+  const stream = codewords.flatMap((byte) => Array.from({ length: 8 }, (_, i) => (byte >>> (7 - i)) & 1));
+  let index = 0;
+  let upward = true;
+  for (let col = size - 1; col > 0; col -= 2) {
+    if (col === 6) col -= 1;
+    for (let step = 0; step < size; step += 1) {
+      const row = upward ? size - 1 - step : step;
+      for (let offset = 0; offset < 2; offset += 1) {
+        const cc = col - offset;
+        if (matrix[row][cc] !== null) continue;
+        const bit = stream[index] || 0;
+        const masked = bit ^ (((row + cc) % 2 === 0) ? 1 : 0);
+        matrix[row][cc] = Boolean(masked);
+        index += 1;
+      }
+    }
+    upward = !upward;
+  }
+
+  const format = formatBits(1, 0);
+  const setFormat = (row, col, bitIndex) => set(row, col, Boolean((format >>> bitIndex) & 1));
+  for (let i = 0; i <= 5; i += 1) setFormat(8, i, i);
+  setFormat(8, 7, 6);
+  setFormat(8, 8, 7);
+  setFormat(7, 8, 8);
+  for (let i = 9; i < 15; i += 1) setFormat(14 - i, 8, i);
+  for (let i = 0; i < 8; i += 1) setFormat(size - 1 - i, 8, i);
+  for (let i = 8; i < 15; i += 1) setFormat(8, size - 15 + i, i);
+  set(size - 8, 8, true);
+
+  return matrix;
+}
+
+function reedSolomon(data, degree) {
+  const exp = Array(512).fill(0);
+  const log = Array(256).fill(0);
+  let value = 1;
+  for (let i = 0; i < 255; i += 1) {
+    exp[i] = value;
+    log[value] = i;
+    value <<= 1;
+    if (value & 0x100) value ^= 0x11d;
+  }
+  for (let i = 255; i < 512; i += 1) exp[i] = exp[i - 255];
+  const multiply = (left, right) => (left && right ? exp[log[left] + log[right]] : 0);
+  let generator = [1];
+  for (let i = 0; i < degree; i += 1) {
+    const next = Array(generator.length + 1).fill(0);
+    generator.forEach((coef, index) => {
+      next[index] ^= coef;
+      next[index + 1] ^= multiply(coef, exp[i]);
+    });
+    generator = next;
+  }
+  const result = Array(degree).fill(0);
+  data.forEach((byte) => {
+    const factor = byte ^ result.shift();
+    result.push(0);
+    for (let i = 0; i < degree; i += 1) result[i] ^= multiply(generator[i + 1], factor);
+  });
+  return result;
+}
+
+function formatBits(errorLevel, mask) {
+  const data = (errorLevel << 3) | mask;
+  let bits = data << 10;
+  for (let i = 14; i >= 10; i -= 1) {
+    if ((bits >>> i) & 1) bits ^= 0x537 << (i - 10);
+  }
+  return ((data << 10) | bits) ^ 0x5412;
 }
 
 function escapeSvg(text) {
