@@ -242,13 +242,8 @@ document.querySelector("#posterBtn").addEventListener("click", () => {
   showPosterImage();
 });
 
-document.querySelector("#momentBtn").addEventListener("click", () => {
-  showToast("微信不开放直接拉起朋友圈发布；请长按保存海报后，从朋友圈选择图片发布。");
-});
-
-document.querySelector("#posterCloseBtn").addEventListener("click", () => {
-  posterModal.classList.remove("is-visible");
-  posterModal.setAttribute("aria-hidden", "true");
+posterModal.addEventListener("click", (event) => {
+  if (event.target === posterModal) closePosterModal();
 });
 
 document.querySelector("#soundBtn").addEventListener("click", (event) => {
@@ -439,16 +434,15 @@ function playCrunch() {
 function showPosterImage() {
   if (!currentResultType) return;
   const data = TYPES[currentResultType];
-  const tags = data.tags.join(" / ");
-  const copyLines = formatResultCopy(data.copy)
-    .replaceAll("<br>", "\n")
-    .split("\n")
-    .slice(0, 5);
+  const tagLines = wrapPosterText(data.tags.join(" / "), 18);
+  const copyLines = getPosterCopyLines(data.copy);
+  const copyFontSize = copyLines.length > 10 ? 20 : copyLines.length > 8 ? 22 : 24;
+  const copyLineGap = copyLines.length > 10 ? 30 : copyLines.length > 8 ? 32 : 36;
   const posterArt = createIllustration(currentResultType, data).replace(
     "<svg ",
-    '<svg x="82" y="320" width="556" height="320" '
+    '<svg x="82" y="300" width="556" height="300" '
   );
-  const qrCode = createQrSvg(SHARE_URL, 500, 910, 120);
+  const qrCode = createQrSvg(SHARE_URL, 506, 918, 112);
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="720" height="1120" viewBox="0 0 720 1120">
       <rect width="720" height="1120" fill="#fff2d5"/>
@@ -456,17 +450,68 @@ function showPosterImage() {
       <text x="82" y="105" font-family="Arial, sans-serif" font-size="28" font-weight="900" fill="#1d1a15">1号牧场，你的牛搭子</text>
       <text x="82" y="190" font-family="Arial, sans-serif" font-size="34" font-weight="900" fill="#df4b35">你的牛搭子人格</text>
       <text x="82" y="270" font-family="Arial, sans-serif" font-size="64" font-weight="900" fill="#1d1a15">${escapeSvg(currentResultType)}</text>
-      <rect x="82" y="320" width="556" height="320" rx="24" fill="#fffaf0" stroke="#1d1a15" stroke-width="6"/>
+      <rect x="82" y="300" width="556" height="300" rx="24" fill="#fffaf0" stroke="#1d1a15" stroke-width="6"/>
       ${posterArt}
-      ${copyLines.map((line, index) => `<text x="82" y="${700 + index * 44}" font-family="Arial, sans-serif" font-size="27" font-weight="700" fill="#3f3429">${escapeSvg(line)}</text>`).join("")}
-      <text x="82" y="948" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#28734f">${escapeSvg(tags)}</text>
-      <text x="82" y="1000" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#1d1a15">1号牧场，牛肉大脆条全新上市</text>
-      <text x="82" y="1040" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#725f48">扫码测你的牛搭子人格</text>
+      ${createSvgTextLines(copyLines, 82, 642, copyLineGap, copyFontSize, 700, "#3f3429")}
+      ${createSvgTextLines(tagLines, 82, 942, 31, 23, 900, "#28734f")}
+      <text x="82" y="1014" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#1d1a15">1号牧场，牛肉大脆条全新上市</text>
+      <text x="82" y="1054" font-family="Arial, sans-serif" font-size="21" font-weight="800" fill="#725f48">扫码测你的牛搭子人格</text>
       ${qrCode}
     </svg>`;
   posterImage.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
   posterModal.classList.add("is-visible");
   posterModal.setAttribute("aria-hidden", "false");
+}
+
+function closePosterModal() {
+  posterModal.classList.remove("is-visible");
+  posterModal.setAttribute("aria-hidden", "true");
+}
+
+function getPosterCopyLines(copy) {
+  return copy
+    .split(/(?<=[，。；])/)
+    .map((sentence) => sentence.trim())
+    .filter(Boolean)
+    .flatMap((sentence) => wrapPosterText(sentence, 22));
+}
+
+function wrapPosterText(text, maxChars) {
+  const chunks = [];
+  let current = "";
+
+  Array.from(text).forEach((char) => {
+    const isWide = /[\u4e00-\u9fff\uff00-\uffef]/.test(char);
+    const isPunctuation = /[，。；、：？！）”]/.test(char);
+    const nextLength = visualLength(current) + (isWide ? 1 : 0.55);
+    if (current && nextLength > maxChars) {
+      if (isPunctuation) {
+        current += char;
+        chunks.push(current);
+        current = "";
+      } else {
+        chunks.push(current);
+        current = char;
+      }
+    } else {
+      current += char;
+    }
+  });
+
+  if (current) chunks.push(current);
+  return chunks;
+}
+
+function visualLength(text) {
+  return Array.from(text).reduce((total, char) => {
+    return total + (/[\u4e00-\u9fff\uff00-\uffef]/.test(char) ? 1 : 0.55);
+  }, 0);
+}
+
+function createSvgTextLines(lines, x, y, gap, size, weight, color) {
+  return lines
+    .map((line, index) => `<text x="${x}" y="${y + index * gap}" font-family="Arial, sans-serif" font-size="${size}" font-weight="${weight}" fill="${color}">${escapeSvg(line)}</text>`)
+    .join("");
 }
 
 function createQrSvg(text, x, y, size) {
