@@ -173,7 +173,7 @@ const QUESTIONS = [
 ];
 
 const typeOrder = Object.keys(TYPES);
-const SHARE_URL = "https://yihaoranch.songroad.pro";
+const SHARE_URL = "http://yihaoranch.songroad.pro/";
 const scores = Object.fromEntries(typeOrder.map((type) => [type, 0]));
 const selectedAnswers = [];
 let currentQuestion = 0;
