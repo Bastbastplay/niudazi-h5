@@ -551,7 +551,7 @@ async function createPosterSvg() {
     "<svg ",
     '<svg x="82" y="300" width="556" height="300" '
   );
-  const qrCode = qrSrc ? createQrImage(qrSrc, 247, 1000, 226) : createQrSvg(getShareUrl(), 247, 1000, 226);
+  const qrCode = qrSrc ? createQrImage(qrSrc, 468, 1080, 180) : createQrSvg(getShareUrl(), 468, 1080, 180);
   return `
     <svg xmlns="http://www.w3.org/2000/svg" width="720" height="1380" viewBox="0 0 720 1380">
       <rect width="720" height="1380" fill="#fff2d5"/>

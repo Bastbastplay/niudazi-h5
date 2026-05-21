@@ -933,11 +933,11 @@ h1 span {
 
 .poster-qr-hotspot {
   position: absolute;
-  left: 34.31%;
-  top: 72.46%;
+  left: 65%;
+  top: 78.26%;
   z-index: 2;
   display: block;
-  width: 31.39%;
+  width: 25%;
   height: auto;
   border: 0;
   border-radius: 0;
