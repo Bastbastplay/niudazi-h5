@@ -544,8 +544,8 @@ async function showPosterImage() {
 async function createPosterSvg() {
   const data = TYPES[currentResultType];
   const copyLines = getPosterCopyLines(data.copy);
-  const copyFontSize = copyLines.length > 10 ? 20 : copyLines.length > 8 ? 22 : 24;
-  const copyLineGap = copyLines.length > 10 ? 30 : copyLines.length > 8 ? 32 : 36;
+  const copyFontSize = copyLines.length > 10 ? 22 : copyLines.length > 8 ? 24 : 26;
+  const copyLineGap = copyLines.length > 10 ? 32 : copyLines.length > 8 ? 34 : 38;
   const qrSrc = await getShareQrDataUrl();
   const posterArt = createIllustration(currentResultType, data).replace(
     "<svg ",
@@ -561,7 +561,7 @@ async function createPosterSvg() {
       <text x="82" y="270" font-family="Arial, sans-serif" font-size="64" font-weight="900" fill="#1d1a15">${escapeSvg(currentResultType)}</text>
       <rect x="82" y="300" width="556" height="300" rx="24" fill="#fffaf0" stroke="#1d1a15" stroke-width="6"/>
       ${posterArt}
-      ${createSvgTextLines(copyLines, 82, 642, copyLineGap, copyFontSize, 700, "#3f3429")}
+      ${createSvgTextLines(copyLines, 82, 662, copyLineGap, copyFontSize, 700, "#3f3429")}
       ${qrCode}
       <text x="82" y="1322" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#1d1a15">1号牧场 牛肉大脆条全新上市</text>
     </svg>`;
