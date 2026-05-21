@@ -919,12 +919,30 @@ h1 span {
   text-align: center;
 }
 
-.poster-modal-card img {
+.poster-image-wrap {
+  position: relative;
+}
+
+.poster-image-wrap > img:first-child {
   display: block;
   width: 100%;
   border: 2px solid var(--ink);
   border-radius: 8px;
   background: var(--paper);
+}
+
+.poster-qr-hotspot {
+  position: absolute;
+  left: 29.72%;
+  top: 67.39%;
+  z-index: 2;
+  display: block;
+  width: 40.56%;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+  image-rendering: pixelated;
 }
 
 .poster-modal-card p {

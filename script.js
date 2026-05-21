@@ -177,6 +177,10 @@ const SHARE_URL = "https://yihaoranch.songroad.pro/";
 const SHARE_TITLE = "牛搭子人格，藏不住了";
 const SHARE_DESC = "当代打工人的精神自测，看看你是哪种牛搭子！";
 const BRAND_LOGO_SRC = "./assets/brand-logo.png";
+const SHARE_QR_SRCS = [
+  "https://api.qrserver.com/v1/create-qr-code/?size=600x600&margin=40&format=png&data=https%3A%2F%2Fyihaoranch.songroad.pro%2F",
+  "https://quickchart.io/qr?text=https%3A%2F%2Fyihaoranch.songroad.pro%2F&size=600&margin=4"
+];
 const scores = Object.fromEntries(typeOrder.map((type) => [type, 0]));
 const selectedAnswers = [];
 let currentQuestion = 0;
@@ -184,6 +188,7 @@ let soundEnabled = false;
 let isAdvancing = false;
 let currentResultType = "";
 let brandLogoDataUrl = "";
+let shareQrDataUrl = "";
 
 const startScreen = document.querySelector("#startScreen");
 const quizScreen = document.querySelector("#quizScreen");
@@ -202,6 +207,7 @@ const posterCode = document.querySelector("#posterCode");
 const toast = document.querySelector("#toast");
 const posterModal = document.querySelector("#posterModal");
 const posterImage = document.querySelector("#posterImage");
+const posterQrHotspot = document.querySelector("#posterQrHotspot");
 const asmrAudio = document.querySelector("#asmrAudio");
 
 document.querySelector("#startBtn").addEventListener("click", () => {
@@ -525,8 +531,9 @@ function playCrunch() {
 async function showPosterImage() {
   if (!currentResultType) return;
   const svg = await createPosterSvg();
+  posterQrHotspot.src = SHARE_QR_SRCS[0];
   try {
-    posterImage.src = await renderSvgToPng(svg, 720, 1120);
+    posterImage.src = await renderSvgToPng(svg, 720, 1380);
   } catch (error) {
     posterImage.src = svgToDataUrl(svg);
   }
@@ -541,15 +548,16 @@ async function createPosterSvg() {
   const copyLines = getPosterCopyLines(data.copy);
   const copyFontSize = copyLines.length > 10 ? 20 : copyLines.length > 8 ? 22 : 24;
   const copyLineGap = copyLines.length > 10 ? 30 : copyLines.length > 8 ? 32 : 36;
+  const qrSrc = await getShareQrDataUrl();
   const posterArt = createIllustration(currentResultType, data).replace(
     "<svg ",
     '<svg x="82" y="300" width="556" height="300" '
   );
-  const qrCode = createQrSvg(getShareUrl(), 506, 898, 142);
+  const qrCode = qrSrc ? createQrImage(qrSrc, 214, 930, 292) : createQrSvg(getShareUrl(), 214, 930, 292);
   return `
-    <svg xmlns="http://www.w3.org/2000/svg" width="720" height="1120" viewBox="0 0 720 1120">
-      <rect width="720" height="1120" fill="#fff2d5"/>
-      <path d="M42 42h636v1036H42z" fill="#f9e4b7" stroke="#1d1a15" stroke-width="8" rx="24"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="720" height="1380" viewBox="0 0 720 1380">
+      <rect width="720" height="1380" fill="#fff2d5"/>
+      <path d="M42 42h636v1296H42z" fill="#f9e4b7" stroke="#1d1a15" stroke-width="8" rx="24"/>
       ${createLogoImage(logoSrc, 82, 73, 96, 43)}
       <text x="190" y="105" font-family="Arial, sans-serif" font-size="28" font-weight="900" fill="#1d1a15">你的牛搭子</text>
       <text x="82" y="190" font-family="Arial, sans-serif" font-size="34" font-weight="900" fill="#df4b35">你的牛搭子人格</text>
@@ -557,10 +565,10 @@ async function createPosterSvg() {
       <rect x="82" y="300" width="556" height="300" rx="24" fill="#fffaf0" stroke="#1d1a15" stroke-width="6"/>
       ${posterArt}
       ${createSvgTextLines(copyLines, 82, 642, copyLineGap, copyFontSize, 700, "#3f3429")}
-      ${createSvgTextLines(tagLines, 82, 942, 30, 20, 900, "#28734f")}
-      ${createLogoImage(logoSrc, 82, 1028, 67, 30)}
-      <text x="160" y="1058" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#1d1a15">牛肉大脆条全新上市</text>
+      ${createSvgTextLines(tagLines, 82, 900, 30, 20, 900, "#28734f")}
       ${qrCode}
+      ${createLogoImage(logoSrc, 82, 1292, 67, 30)}
+      <text x="160" y="1322" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#1d1a15">牛肉大脆条全新上市</text>
     </svg>`;
 }
 
@@ -604,6 +612,31 @@ async function getBrandLogoDataUrl() {
   } catch (error) {
     return BRAND_LOGO_SRC;
   }
+}
+
+async function getShareQrDataUrl() {
+  if (shareQrDataUrl) return shareQrDataUrl;
+  for (const src of SHARE_QR_SRCS) {
+    try {
+      const response = await fetch(src, { mode: "cors", cache: "force-cache" });
+      if (!response.ok) continue;
+      const blob = await response.blob();
+      shareQrDataUrl = await blobToDataUrl(blob);
+      return shareQrDataUrl;
+    } catch (error) {
+      // Keep trying the next QR provider, then fall back to the inline generator.
+    }
+  }
+  return "";
+}
+
+function blobToDataUrl(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
 }
 
 function createLogoImage(src, x, y, width, height) {
@@ -685,6 +718,15 @@ function createQrSvg(text, x, y, size) {
       <rect x="${x - 8}" y="${y - 8}" width="${size + 16}" height="${size + 42}" rx="12" fill="#fff" stroke="#1d1a15" stroke-width="5"/>
       <rect x="${x}" y="${y}" width="${size}" height="${size}" fill="#fff"/>
       <g fill="#000">${dots.join("")}</g>
+      <text x="${x + size / 2}" y="${y + size + 28}" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="900" fill="#1d1a15">扫码开测</text>
+    </g>`;
+}
+
+function createQrImage(src, x, y, size) {
+  return `
+    <g>
+      <rect x="${x - 10}" y="${y - 10}" width="${size + 20}" height="${size + 46}" rx="12" fill="#fff" stroke="#1d1a15" stroke-width="5"/>
+      <image href="${escapeSvg(src)}" x="${x}" y="${y}" width="${size}" height="${size}" preserveAspectRatio="xMidYMid meet" image-rendering="pixelated"/>
       <text x="${x + size / 2}" y="${y + size + 28}" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="900" fill="#1d1a15">扫码开测</text>
     </g>`;
 }
