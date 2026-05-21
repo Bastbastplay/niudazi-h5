@@ -97,13 +97,41 @@ button {
 }
 
 .brand-lockup {
-  display: grid;
-  gap: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   line-height: 1.05;
+}
+
+.brand-lockup img {
+  display: block;
+  width: auto;
+  height: 19px;
 }
 
 .brand-lockup i {
   font-style: normal;
+}
+
+.brand-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.brand-inline img {
+  display: block;
+  width: auto;
+  height: 18px;
+}
+
+.brand-inline-footer {
+  align-items: flex-end;
+  line-height: 1.15;
+}
+
+.brand-inline-footer img {
+  height: 16px;
 }
 
 .hero-art {
@@ -764,7 +792,7 @@ h1 span {
 .result-illustration {
   position: relative;
   height: 258px;
-  margin: 18px 0 10px;
+  margin: 18px 0 19px;
   border: 2px solid var(--ink);
   border-radius: 10px;
   overflow: hidden;
@@ -780,7 +808,7 @@ h1 span {
 }
 
 .result-label {
-  margin: 10px 0 12px;
+  margin: 0 0 12px;
   color: var(--red);
   font-size: 12px;
   font-weight: 950;
@@ -819,13 +847,13 @@ h1 span {
   margin-top: 18px;
   padding-top: 12px;
   border-top: 2px solid var(--ink);
-  align-items: flex-start;
+  align-items: flex-end;
   font-size: 10px;
   line-height: 1.35;
 }
 
 .poster-footer span:first-child {
-  max-width: 180px;
+  max-width: 210px;
 }
 
 .result-actions {

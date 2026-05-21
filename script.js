@@ -173,13 +173,17 @@ const QUESTIONS = [
 ];
 
 const typeOrder = Object.keys(TYPES);
-const SHARE_URL = "http://yihaoranch.songroad.pro/";
+const SHARE_URL = "https://yihaoranch.songroad.pro/";
+const SHARE_TITLE = "牛搭子人格，藏不住了";
+const SHARE_DESC = "当代打工人的精神自测，看看你是哪种牛搭子！";
+const BRAND_LOGO_SRC = "./assets/brand-logo.png";
 const scores = Object.fromEntries(typeOrder.map((type) => [type, 0]));
 const selectedAnswers = [];
 let currentQuestion = 0;
 let soundEnabled = false;
 let isAdvancing = false;
 let currentResultType = "";
+let brandLogoDataUrl = "";
 
 const startScreen = document.querySelector("#startScreen");
 const quizScreen = document.querySelector("#quizScreen");
@@ -219,27 +223,27 @@ document.querySelector("#restartBtn").addEventListener("click", () => {
 });
 
 document.querySelector("#shareBtn").addEventListener("click", async () => {
-  const text = `@你的牛搭子 一起测一测：我的牛搭子人格是「${resultName.textContent}」，你是什么型？`;
+  const shareData = getShareData();
+
+  if (shareWithWeChatBridge(shareData)) return;
+
   if (navigator.share) {
     try {
-      await navigator.share({ title: "牛搭子人格，藏不住了", text });
+      await navigator.share(shareData);
       return;
     } catch (error) {
-      showToast("分享没有发出，可以再点一次。");
-      return;
+      if (error.name === "AbortError") {
+        showToast("分享已取消，可以再点一次。");
+        return;
+      }
     }
   }
 
-  if (navigator.clipboard) {
-    await navigator.clipboard.writeText(text);
-    showToast("分享文案已复制，去 @ 你的牛搭子吧。");
-  } else {
-    showToast(text);
-  }
+  await copyShareText(shareData);
 });
 
-document.querySelector("#posterBtn").addEventListener("click", () => {
-  showPosterImage();
+document.querySelector("#posterBtn").addEventListener("click", async () => {
+  await showPosterImage();
 });
 
 posterModal.addEventListener("click", (event) => {
@@ -324,8 +328,95 @@ function showResult() {
   posterCode.textContent = `NO.${String(typeOrder.indexOf(topType) + 1).padStart(3, "0")}`;
   tagRow.innerHTML = data.tags.map((tag) => `<span>${tag}</span>`).join("");
   resultIllustration.innerHTML = createIllustration(topType, data);
+  updateWeChatShareMenu();
   showScreen(quizScreen, resultScreen);
   throwConfetti(data.color, data.accent);
+}
+
+function getShareUrl() {
+  try {
+    return new URL(SHARE_URL, window.location.href).href;
+  } catch (error) {
+    return SHARE_URL;
+  }
+}
+
+function getShareData() {
+  const result = resultName.textContent.trim();
+  const suffix = result ? `我的牛搭子人格是「${result}」，你是什么型？` : SHARE_DESC;
+  return {
+    title: SHARE_TITLE,
+    text: `@你的牛搭子 一起测一测：${suffix}`,
+    url: getShareUrl()
+  };
+}
+
+function getShareImageUrl() {
+  try {
+    return new URL(BRAND_LOGO_SRC, window.location.href).href;
+  } catch (error) {
+    return BRAND_LOGO_SRC;
+  }
+}
+
+function shareWithWeChatBridge(shareData) {
+  if (typeof window.WeixinJSBridge === "undefined") return false;
+
+  window.WeixinJSBridge.invoke(
+    "sendAppMessage",
+    {
+      appid: "",
+      img_url: getShareImageUrl(),
+      img_width: "120",
+      img_height: "120",
+      link: shareData.url,
+      desc: shareData.text,
+      title: shareData.title
+    },
+    (response) => {
+      const message = response?.err_msg || "";
+      showToast(message.includes(":ok") ? "已唤起微信分享。" : "请用右上角菜单分享给微信好友。");
+    }
+  );
+  return true;
+}
+
+function updateWeChatShareMenu() {
+  if (typeof window.WeixinJSBridge === "undefined") return;
+
+  const shareData = getShareData();
+  const payload = {
+    appid: "",
+    img_url: getShareImageUrl(),
+    img_width: "120",
+    img_height: "120",
+    link: shareData.url,
+    desc: shareData.text,
+    title: shareData.title
+  };
+
+  window.WeixinJSBridge.on("menu:share:appmessage", () => {
+    window.WeixinJSBridge.invoke("sendAppMessage", payload);
+  });
+  window.WeixinJSBridge.on("menu:share:timeline", () => {
+    window.WeixinJSBridge.invoke("shareTimeline", payload);
+  });
+}
+
+document.addEventListener("WeixinJSBridgeReady", updateWeChatShareMenu, false);
+
+async function copyShareText(shareData) {
+  const text = `${shareData.text}\n${shareData.url}`;
+  if (navigator.clipboard) {
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast("分享链接已复制，去 @ 你的牛搭子吧。");
+      return;
+    } catch (error) {
+      // Fall through to the visible toast for older in-app browsers.
+    }
+  }
+  showToast("复制失败，请手动复制页面链接分享。");
 }
 
 function formatResultCopy(copy) {
@@ -431,9 +522,21 @@ function playCrunch() {
   asmrAudio.currentTime = Math.max(0, asmrAudio.currentTime - 0.08);
 }
 
-function showPosterImage() {
+async function showPosterImage() {
   if (!currentResultType) return;
+  const svg = await createPosterSvg();
+  try {
+    posterImage.src = await renderSvgToPng(svg, 720, 1120);
+  } catch (error) {
+    posterImage.src = svgToDataUrl(svg);
+  }
+  posterModal.classList.add("is-visible");
+  posterModal.setAttribute("aria-hidden", "false");
+}
+
+async function createPosterSvg() {
   const data = TYPES[currentResultType];
+  const logoSrc = await getBrandLogoDataUrl();
   const tagLines = getPosterTagLines(data.tags);
   const copyLines = getPosterCopyLines(data.copy);
   const copyFontSize = copyLines.length > 10 ? 20 : copyLines.length > 8 ? 22 : 24;
@@ -442,24 +545,69 @@ function showPosterImage() {
     "<svg ",
     '<svg x="82" y="300" width="556" height="300" '
   );
-  const qrCode = createQrSvg(SHARE_URL, 526, 918, 112);
-  const svg = `
+  const qrCode = createQrSvg(getShareUrl(), 506, 898, 142);
+  return `
     <svg xmlns="http://www.w3.org/2000/svg" width="720" height="1120" viewBox="0 0 720 1120">
       <rect width="720" height="1120" fill="#fff2d5"/>
       <path d="M42 42h636v1036H42z" fill="#f9e4b7" stroke="#1d1a15" stroke-width="8" rx="24"/>
-      <text x="82" y="105" font-family="Arial, sans-serif" font-size="28" font-weight="900" fill="#1d1a15">1号牧场，你的牛搭子</text>
+      ${createLogoImage(logoSrc, 82, 73, 96, 43)}
+      <text x="190" y="105" font-family="Arial, sans-serif" font-size="28" font-weight="900" fill="#1d1a15">你的牛搭子</text>
       <text x="82" y="190" font-family="Arial, sans-serif" font-size="34" font-weight="900" fill="#df4b35">你的牛搭子人格</text>
       <text x="82" y="270" font-family="Arial, sans-serif" font-size="64" font-weight="900" fill="#1d1a15">${escapeSvg(currentResultType)}</text>
       <rect x="82" y="300" width="556" height="300" rx="24" fill="#fffaf0" stroke="#1d1a15" stroke-width="6"/>
       ${posterArt}
       ${createSvgTextLines(copyLines, 82, 642, copyLineGap, copyFontSize, 700, "#3f3429")}
       ${createSvgTextLines(tagLines, 82, 942, 30, 20, 900, "#28734f")}
-      <text x="82" y="1014" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#1d1a15">1号牧场，牛肉大脆条全新上市</text>
+      ${createLogoImage(logoSrc, 82, 1028, 67, 30)}
+      <text x="160" y="1058" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#1d1a15">牛肉大脆条全新上市</text>
       ${qrCode}
     </svg>`;
-  posterImage.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-  posterModal.classList.add("is-visible");
-  posterModal.setAttribute("aria-hidden", "false");
+}
+
+function svgToDataUrl(svg) {
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
+async function renderSvgToPng(svg, width, height) {
+  const image = new Image();
+  image.decoding = "async";
+  image.src = svgToDataUrl(svg);
+
+  await new Promise((resolve, reject) => {
+    image.onload = resolve;
+    image.onerror = reject;
+  });
+
+  const canvas = document.createElement("canvas");
+  const scale = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = width * scale;
+  canvas.height = height * scale;
+  const context = canvas.getContext("2d");
+  context.fillStyle = "#fff2d5";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.drawImage(image, 0, 0, canvas.width, canvas.height);
+  return canvas.toDataURL("image/png");
+}
+
+async function getBrandLogoDataUrl() {
+  if (brandLogoDataUrl) return brandLogoDataUrl;
+  try {
+    const response = await fetch(BRAND_LOGO_SRC);
+    const blob = await response.blob();
+    brandLogoDataUrl = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+    return brandLogoDataUrl;
+  } catch (error) {
+    return BRAND_LOGO_SRC;
+  }
+}
+
+function createLogoImage(src, x, y, width, height) {
+  return `<image href="${escapeSvg(src)}" x="${x}" y="${y}" width="${width}" height="${height}" preserveAspectRatio="xMinYMid meet"/>`;
 }
 
 function closePosterModal() {
@@ -521,7 +669,7 @@ function createSvgTextLines(lines, x, y, gap, size, weight, color) {
 
 function createQrSvg(text, x, y, size) {
   const qr = createQrMatrix(text);
-  const quiet = 4;
+  const quiet = 6;
   const module = size / (qr.length + quiet * 2);
   const dots = [];
 
@@ -534,8 +682,9 @@ function createQrSvg(text, x, y, size) {
 
   return `
     <g shape-rendering="crispEdges">
-      <rect x="${x}" y="${y}" width="${size}" height="${size}" rx="10" fill="#fffaf0" stroke="#1d1a15" stroke-width="5"/>
-      <g fill="#1d1a15">${dots.join("")}</g>
+      <rect x="${x - 8}" y="${y - 8}" width="${size + 16}" height="${size + 42}" rx="12" fill="#fff" stroke="#1d1a15" stroke-width="5"/>
+      <rect x="${x}" y="${y}" width="${size}" height="${size}" fill="#fff"/>
+      <g fill="#000">${dots.join("")}</g>
       <text x="${x + size / 2}" y="${y + size + 28}" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="900" fill="#1d1a15">扫码开测</text>
     </g>`;
 }
